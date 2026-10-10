@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Hawas — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D1117;
+    --bg-raised: #131A24;
+    --line: #232A38;
+    --fg: #EDEDED;
+    --muted: #8B93A7;
+    --accent: #4C7CF0;
+    --accent-dim: #2C3D63;
+    --ok: #4CE0A0;
+    --gold: #E0B44C;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--accent-dim); color: var(--fg); }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap { max-width: 740px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(13, 17, 23, 0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+  .nav-id { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+  .nav-links { display: flex; gap: 20px; font-family: var(--mono); font-size: 13px; }
+  .nav-links a { color: var(--muted); transition: color 0.15s; }
+  .nav-links a:hover { color: var(--fg); }
+
+  /* ---------- HERO ---------- */
+  header.hero { padding: 72px 0 56px; border-bottom: 1px solid var(--line); }
+
+  .judge-box {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 36px;
+  }
+  .judge-box-top {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+  .judge-box-body { padding: 18px 16px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+  .judge-box-body .row { display: flex; gap: 12px; margin-bottom: 6px; }
+  .judge-box-body .row:last-child { margin-bottom: 0; }
+  .judge-box-body .k { width: 90px; flex-shrink: 0; color: #5B6478; }
+  .judge-box-body .v-ok { color: var(--ok); font-weight: 500; }
+  .judge-box-body .v { color: var(--fg); }
+
+  h1 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(30px, 4.6vw, 42px);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+  }
+
+  .hero p.lede { color: var(--muted); font-size: 17px; max-width: 58ch; margin-bottom: 28px; }
+
+  .hero-links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    font-family: var(--mono); font-size: 13px;
+    padding: 9px 16px; border-radius: 4px;
+    border: 1px solid var(--line); color: var(--fg);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #08101F; font-weight: 500; }
+  .btn.primary:hover { background: #5D89F2; border-color: #5D89F2; }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  .sec-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 28px; }
+  .sec-num { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+  .sec-head h2 { font-family: var(--sans); font-weight: 700; font-size: 22px; }
+
+  /* ---------- SKILLS ---------- */
+  .skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; }
+  .skill-group .label { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .skill-group .items { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-group .items span {
+    font-family: var(--mono); font-size: 13px;
+    padding: 4px 10px; background: var(--bg-raised);
+    border: 1px solid var(--line); border-radius: 4px; color: var(--fg);
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .job { display: grid; grid-template-columns: 150px 1fr; gap: 20px; margin-bottom: 36px; }
+  .job:last-child { margin-bottom: 0; }
+  .job .when { font-family: var(--mono); font-size: 12px; color: var(--muted); padding-top: 3px; }
+  .job .role { font-weight: 600; font-size: 16px; margin-bottom: 2px; }
+  .job .org { color: var(--accent); font-size: 14px; margin-bottom: 12px; }
+  .job ul { list-style: none; }
+  .job li { position: relative; padding-left: 18px; margin-bottom: 8px; color: var(--muted); font-size: 14.5px; }
+  .job li::before {
+    content: ''; position: absolute; left: 0; top: 9px;
+    width: 5px; height: 5px; background: var(--line); border-radius: 50%;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .project {
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 22px; margin-bottom: 16px; background: var(--bg-raised);
+  }
+  .project:last-child { margin-bottom: 0; }
+  .project-top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 10px; }
+  .project h3 { font-size: 17px; font-weight: 600; }
+  .project .tag { font-family: var(--mono); font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .project p { color: var(--muted); font-size: 14.5px; margin-bottom: 12px; }
+  .project .stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .project .stack span {
+    font-family: var(--mono); font-size: 11.5px;
+    padding: 3px 8px; border: 1px solid var(--line); border-radius: 3px; color: var(--accent);
+  }
+
+  /* ---------- ACHIEVEMENT ---------- */
+  .achievement {
+    display: flex; gap: 16px;
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 20px 22px; background: var(--bg-raised);
+  }
+  .achievement .medal {
+    font-family: var(--mono); font-size: 12px; color: var(--gold);
+    border: 1px solid #4A3D1E; background: #1E1A0E;
+    padding: 4px 8px; border-radius: 4px; height: fit-content; white-space: nowrap;
+  }
+  .achievement h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .achievement .org { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+  .achievement p { color: var(--muted); font-size: 14.5px; }
+
+  /* ---------- EDUCATION / LANGUAGE ---------- */
+  .fact-row { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .fact-row:last-child { border-bottom: none; }
+  .fact-row .main { font-weight: 600; font-size: 15px; }
+  .fact-row .sub { color: var(--muted); font-size: 13.5px; margin-top: 2px; }
+  .fact-row .side { font-family: var(--mono); font-size: 12.5px; color: var(--muted); text-align: right; flex-shrink: 0; }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer { padding: 56px 0 72px; }
+  footer h2 { font-size: 26px; font-weight: 700; margin-bottom: 12px; }
+  footer p { color: var(--muted); margin-bottom: 28px; max-width: 50ch; }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; }
+  .contact-links a {
+    display: flex; align-items: center; gap: 12px;
+    font-family: var(--mono); font-size: 14px; color: var(--fg);
+    padding: 12px 16px; border: 1px solid var(--line); border-radius: 6px;
+    transition: border-color 0.15s, transform 0.15s; width: fit-content;
+  }
+  .contact-links a:hover { border-color: var(--accent); transform: translateX(4px); }
+  .contact-links .k { color: var(--muted); width: 70px; flex-shrink: 0; }
+
+  .foot-note { margin-top: 48px; font-family: var(--mono); font-size: 12px; color: #4A5163; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 640px) {
+    .wrap { padding: 0 20px; }
+    .skill-grid { grid-template-columns: 1fr; }
+    .job { grid-template-columns: 1fr; gap: 6px; }
+    .job .when { padding-top: 0; }
+    .nav-links { gap: 14px; }
+    .achievement { flex-direction: column; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="nav-id">ahawas</span>
+    <div class="nav-links">
+      <a href="#experience">experience</a>
+      <a href="#projects">projects</a>
+      <a href="#achievements">achievements</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="judge-box">
+      <div class="judge-box-top">
+        <span class="dot"></span>
+        <span>submission #002 — profile.cpp</span>
+      </div>
+      <div class="judge-box-body">
+        <div class="row"><span class="k">verdict</span><span class="v-ok">Accepted</span></div>
+        <div class="row"><span class="k">focus</span><span class="v">Software Engineering & AI Automation</span></div>
+        <div class="row"><span class="k">stack</span><span class="v">C++, C#, Python, SQL, LangChain</span></div>
+      </div>
+    </div>
+
+    <h1>Ahmed Hawas builds software and automation that holds up under pressure.</h1>
+    <p class="lede">Computer Science & AI student at Zewail City, trained in end-to-end AI automation through DEPI and sharpened by competitive programming. I turn algorithmic thinking and agentic workflows into shipped, working systems.</p>
+
+    <div class="hero-links">
+      <a class="btn primary" href="mailto:ahmedhawas153@gmail.com">Email me</a>
+      <a class="btn" href="https://linkedin.com/in/ahmed-hawas-5669b9312" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="tel:+201558433216">+20 155 843 3216</a>
+    </div>
+  </div>
+</header>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Technical skills</h2></div>
+    <div class="skill-grid">
+      <div class="skill-group">
+        <div class="label">languages</div>
+        <div class="items"><span>C++</span><span>C#</span><span>Python</span><span>Visual Basic</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="label">AI & automation</div>
+        <div class="items"><span>LLM App Engineering</span><span>Agentic Workflows</span><span>RAG</span><span>LangChain</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="label">software development</div>
+        <div class="items"><span>OOP</span><span>Algorithms</span><span>Data Structures</span><span>Problem Solving</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="label">databases & tools</div>
+        <div class="items"><span>MySQL</span><span>SQLite</span><span>Git</span><span>Visual Studio</span><span>Jupyter</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Experience</h2></div>
+
+    <div class="job">
+      <div class="when">May 2026 — Present</div>
+      <div>
+        <div class="role">AI Automation Trainee</div>
+        <div class="org">Digital Egypt Pioneers Initiative (DEPI)</div>
+        <ul>
+          <li>Completed 200+ hours of hands-on training in end-to-end AI automation workflows, LLM application engineering, and intelligent process automation.</li>
+          <li>Engineered automated agentic workflows integrating LangChain, vector retrieval, and Retrieval-Augmented Generation (RAG) with external toolchains to streamline complex data-processing tasks.</li>
+          <li>Collaborated in agile team sprints to build and deploy AI automation pipelines and capstone projects, following clean-code and version-control standards.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">Jul 2022 — Present</div>
+      <div>
+        <div class="role">ICPC Contest Instructor</div>
+        <div class="org">University Team</div>
+        <ul>
+          <li>Guided fellow students in C++ problem-solving and algorithmic technique, translating complex data structures and algorithms into practical competitive-programming solutions.</li>
+          <li>Collaborated with developers to implement and optimize software solutions, emphasizing code efficiency and performance.</li>
+          <li>Used Git for version control and took part in code reviews, following collaborative development practices.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Projects</h2></div>
+
+    <div class="project">
+      <div class="project-top">
+        <h3>Nile Clinics — Clinic Discovery & Booking Platform</h3>
+        <span class="tag">full application</span>
+      </div>
+      <p>A clinic-discovery and booking application covering clinics across Egypt. Patients filter by governorate and medical specialty; doctor profiles include location, contact details, consultation prices, ratings, and date/time appointment booking.</p>
+      <div class="stack"><span>SQL</span><span>OOP</span><span>Booking Logic</span></div>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <h3>Online Gaming Store</h3>
+        <span class="tag">full application</span>
+      </div>
+      <p>A full online gaming store with a game catalog, categorized listings, pricing, and a shopping cart. Seller-facing functionality lets third parties list their own games, built on object-oriented design throughout.</p>
+      <div class="stack"><span>MySQL</span><span>SQLite</span><span>OOP</span></div>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <h3>ICPC Programming Contests</h3>
+        <span class="tag">2022</span>
+      </div>
+      <p>Competed in programming contests using C++, applying algorithms, data structures, debugging, and problem decomposition under strict time constraints while collaborating with teammates.</p>
+      <div class="stack"><span>C++</span><span>Data Structures</span><span>Algorithms</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Achievements & activities</h2></div>
+    <div class="achievement">
+      <span class="medal">5th / 40 teams</span>
+      <div>
+        <h3>E-GNITE 2026</h3>
+        <div class="org">NU Entrepreneurship Club</div>
+        <p>Selected from 500+ applicants for a 15-day entrepreneurship program; advanced to the Top 10 and placed 5th among 40 shortlisted teams at Youth Entrepreneurs Day. Practiced business idea validation, business model development, and financial viability evaluation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Education & languages</h2></div>
+    <div class="fact-row">
+      <div>
+        <div class="main">Computer Science & Artificial Intelligence</div>
+        <div class="sub">Zewail City of Science, Technology and Innovation, 6 October City, Egypt</div>
+      </div>
+      <div class="side">in progress</div>
+    </div>
+    <div class="fact-row">
+      <div>
+        <div class="main">English</div>
+        <div class="sub">Fluent</div>
+      </div>
+      <div class="side">spoken / written</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk.</h2>
+    <p>Open to software engineering and AI automation roles where I can apply algorithmic problem-solving, LLM application engineering, and database skills on a real team.</p>
+    <div class="contact-links">
+      <a href="mailto:ahmedhawas153@gmail.com"><span class="k">email</span> ahmedhawas153@gmail.com</a>
+      <a href="tel:+201558433216"><span class="k">phone</span> +20 155 843 3216</a>
+      <a href="https://linkedin.com/in/ahmed-hawas-5669b9312" target="_blank" rel="noopener"><span class="k">linkedin</span> /in/ahmed-hawas-5669b9312</a>
+    </div>
+    <div class="foot-note">// end of file</div>
+  </div>
+</footer>
+
+</body>
+</html>
